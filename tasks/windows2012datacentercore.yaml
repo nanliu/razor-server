@@ -1,0 +1,4 @@
+---
+os_version: Windows_2012_DATACENTERCORE
+description: Microsoft Windows 2012 Datacenter Core
+parent: windows

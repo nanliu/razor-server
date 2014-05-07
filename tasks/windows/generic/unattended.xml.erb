@@ -1,0 +1,46 @@
+<%=
+require 'erb'
+require 'pathname'
+require 'yaml'
+
+DEFAULT_OS = 'Windows Server 2012 SERVERSTANDARD'
+
+def load_file(filename, opt={:parse_yaml => false})
+  default={}
+  localdir = File.dirname(__FILE__)
+  filepath = File.join(localdir, '..' , filename)
+  if File.exists?(filepath)
+    if opt[:parse_yaml]
+      result = YAML.load_file(filepath)
+    else
+      result = File.read(filepath)
+    end
+  end 
+  result ||= default
+end
+
+def windows_version
+  version = File.basename(Pathname.new(__FILE__).parent).gsub('_', ' ')
+  case version 
+  when '.', 'generic'
+    DEFAULT_OS
+  else
+    version
+  end
+end
+
+settings = load_file('windows_settings.yaml', :parse_yaml=>true)
+
+os.version = windows_version
+os.license = settings[windows_version]['license']
+
+options = load_file("#{node.hostname}.yaml", :parse_yaml => true)
+
+if options['os_type'] == 'hyperv'
+  content = load_file('hyper-v-unattended.xml.erb')
+else
+  content = load_file('default-unattended.xml.erb')
+end
+
+ERB.new(content).result(binding)
+%>

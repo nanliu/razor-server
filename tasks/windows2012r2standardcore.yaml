@@ -1,0 +1,4 @@
+---
+os_version: Windows_2012_R2_STANDARDCORE
+description: Microsoft Windows 2012 R2 Standard Core
+parent: windows
