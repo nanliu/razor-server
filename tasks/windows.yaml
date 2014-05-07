@@ -1,5 +1,5 @@
 ---
-os_version: generic
+os_version: 2012
 label: Microsoft Windows Generic
 description: Microsoft Windows
 boot_sequence:

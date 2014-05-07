@@ -1,4 +1,4 @@
 ---
 os_version: Windows_2012_R2_STANDARD
 description: Microsoft Windows 2012 R2 Standard
-parent: windows
+parent: windows2012

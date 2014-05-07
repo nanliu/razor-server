@@ -1,6 +1,7 @@
 <%=
 require 'erb'
 require 'pathname'
+require 'ostruct'
 require 'yaml'
 
 DEFAULT_OS = 'Windows Server 2012 SERVERSTANDARD'
@@ -31,6 +32,7 @@ end
 
 settings = load_file('windows_settings.yaml', :parse_yaml=>true)
 
+os = OpenStruct.new
 os.version = windows_version
 os.license = settings[windows_version]['license']
 
