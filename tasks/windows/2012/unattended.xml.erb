@@ -31,12 +31,11 @@ def windows_version
 end
 
 settings = load_file('windows_settings.yaml', :parse_yaml=>true)
+options = load_file("#{node.hostname}.yaml", :parse_yaml => true)
 
 os = OpenStruct.new
 os.version = windows_version
-os.license = settings[windows_version]['license']
-
-options = load_file("#{node.hostname}.yaml", :parse_yaml => true)
+os.license = options['product_key'] || settings[windows_version]['license']
 
 if options['os_type'] == 'hyperv'
   content = load_file('hyper-v-unattended.xml.erb')
